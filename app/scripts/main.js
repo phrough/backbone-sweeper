@@ -27,4 +27,11 @@ window.minesweeper = {
 
 $(document).ready(function(){
 	minesweeper.newGame();
+
+	$('#new-game-submit').on('click', function(){
+		minesweeper.gridCols = $('#count-cols');
+		minesweeper.gridRows = $('#count-rows');
+		minesweeper.bombs = $('#count-bombs');
+		minesweeper.newGame();
+	});
 });
