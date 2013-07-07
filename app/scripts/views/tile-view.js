@@ -24,7 +24,13 @@ minesweeper.Views.tile = Backbone.View.extend({
 	},
 
 	goTime: function() {
-		if(this.model.get('bomb')) {
+
+		if( this.model.get( 'flagged' ) ) {
+			// tile is currently flagged. stop processing click
+			return false;
+		}
+		
+		if( this.model.get( 'bomb' ) ) {
 			this.$el.addClass('bomb');
 			alert('game over!');
 		} else {
@@ -38,7 +44,8 @@ minesweeper.Views.tile = Backbone.View.extend({
 		if( this.model.get( 'cleared' ) ) { return false; }
 
 		// this.$el.addClass( 'flagged' ) : this.$el.removeClass( 'flagged' );
-		this.$el.toggleClass('flagged');
+		this.$el.toggleClass( 'flagged' );
+		this.model.set( 'flagged', true );
 
 		return false;//stops propogation to context menu
 	}
