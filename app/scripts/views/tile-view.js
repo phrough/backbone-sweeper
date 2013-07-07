@@ -41,13 +41,23 @@ minesweeper.Views.tile = Backbone.View.extend({
 	},
 
 	incrementFlag: function() {
-		if( this.model.get( 'cleared' ) ) { return false; }
+		if( this.model.get( 'cleared' ) ) { 
+			// tile is already cleared. don't do anything
+			return false;
+		}
 
+		//toggle 
 		// this.$el.addClass( 'flagged' ) : this.$el.removeClass( 'flagged' );
 		this.$el.toggleClass( 'flagged' );
-		this.model.set( 'flagged', true );
 
-		return false;//stops propogation to context menu
+		// toggle the flag value
+		if( this.model.get('flagged') ) {
+			this.model.set( 'flagged', false );
+		} else {
+			this.model.set( 'flagged', true );
+		}
+
+		return false;// stops propogation to context menu
 	}
 
 
