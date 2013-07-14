@@ -29,9 +29,9 @@ $(document).ready(function(){
 	minesweeper.newGame();
 
 	$('#new-game-submit').on('click', function(){
-		minesweeper.gridCols = $('#count-cols').val();
-		minesweeper.gridRows = $('#count-rows').val();
-		minesweeper.bombs = $('#count-bombs').val();
+		minesweeper.gridCols = Number($('#count-cols').val());
+		minesweeper.gridRows = Number($('#count-rows').val());
+		minesweeper.bombs = Number($('#count-bombs').val());
 		minesweeper.newGame();
 	});
 });
