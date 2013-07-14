@@ -4,8 +4,8 @@ minesweeper.Collections.Tiles = Backbone.Collection.extend({
 
 	initialize: function() {
 		var tileNumber = 1;
-		for( y=1; y<=minesweeper.gridCols; y++ ) {
-			for( x=1; x<=minesweeper.gridRows; x++ ) {
+		for( y=1; y<=minesweeper.gridRows; y++ ) {
+			for( x=1; x<=minesweeper.gridCols; x++ ) {
 				this.add({ id: tileNumber, xPos: x, yPos: y }); 
 				this.get(tileNumber).set('parent', this);
 				tileNumber++;
