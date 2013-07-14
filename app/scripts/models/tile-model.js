@@ -34,64 +34,72 @@ minesweeper.Models.Tile = Backbone.Model.extend({
 		//lets build the list of neighbors.
 		var neighborList = new Array();
 		var thisId = this.get('id');
-		switch (this.get('yPos')) {
-			case 1://left edge
-				switch (this.get('xPos')) {
-					case 1://top left corner
+
+
+		switch (this.get('xPos')) {// top row
+			case 1:
+				switch (this.get('yPos')) {
+					case 1:// top left corner
 						neighborList.push(thisId + 1);
 						neighborList.push(thisId + minesweeper.gridCols);
 						neighborList.push(thisId + minesweeper.gridCols + 1);
 						break;
-					case minesweeper.gridRows://top right corner
-						neighborList.push(thisId - 1);
-						neighborList.push(thisId + minesweeper.gridCols - 1);
-						neighborList.push(thisId + minesweeper.gridCols);
-						break
-					default://top edge, no corner
-						neighborList.push(thisId - 1);
+					case minesweeper.gridRows://bottom left corner
+						// bottom left corner
 						neighborList.push(thisId + 1);
-						neighborList.push(thisId + minesweeper.gridCols - 1);
+						neighborList.push(thisId - minesweeper.gridCols);
+						neighborList.push(thisId - minesweeper.gridCols + 1);
+						break
+					default: // left edge, not a corner
+						// left edge, not a corner
+						neighborList.push(thisId - minesweeper.gridCols);
+						neighborList.push(thisId - minesweeper.gridCols + 1);
+						neighborList.push(thisId + 1);
 						neighborList.push(thisId + minesweeper.gridCols);
 						neighborList.push(thisId + minesweeper.gridCols + 1);
 				}
 				break;
-			case minesweeper.gridCols://right edge
-				switch (this.get('xPos')) {
-					case 1://bottom left corner
-						neighborList.push(thisId + 1);
-						neighborList.push(thisId - minesweeper.gridCols);
-						neighborList.push(thisId - minesweeper.gridCols + 1);
+			case minesweeper.gridCols:// bottom row
+				switch (this.get('yPos')) {
+					case 1:// top right corner
+						// top right corner
+						neighborList.push(thisId - 1);
+						neighborList.push(thisId + minesweeper.gridCols - 1);
+						neighborList.push(thisId + minesweeper.gridCols);
 						break;
-					case minesweeper.gridRows://bottom right corner
+					case minesweeper.gridRows:// bottom right corner
 						neighborList.push(thisId - 1);
-						neighborList.push(thisId - minesweeper.gridCols - 1);
-						neighborList.push(thisId - minesweeper.gridCols);						
-						break
-					default://bottom edge, no corner
 						neighborList.push(thisId - minesweeper.gridCols - 1);
 						neighborList.push(thisId - minesweeper.gridCols);
-						neighborList.push(thisId - minesweeper.gridCols + 1);
+						break
+					default://right edge, not a corner
+						// right edge, not a corner
+						neighborList.push(thisId + minesweeper.gridCols - 1);
+						neighborList.push(thisId + minesweeper.gridCols);
 						neighborList.push(thisId - 1);
-						neighborList.push(thisId + 1);
+						neighborList.push(thisId - minesweeper.gridCols - 1);
+						neighborList.push(thisId - minesweeper.gridCols);
 				}
 				break;
 			default:
-				switch (this.get('xPos')) {
-					case 1://left edge, not a corner
-						neighborList.push(thisId - minesweeper.gridCols);
-						neighborList.push(thisId - minesweeper.gridCols + 1);
+				switch (this.get('yPos')) {
+					case 1://top edge, not a corner
+						// top edge, not a corner
+						neighborList.push(thisId - 1);
 						neighborList.push(thisId + 1);
+						neighborList.push(thisId + minesweeper.gridCols - 1);
 						neighborList.push(thisId + minesweeper.gridCols);
 						neighborList.push(thisId + minesweeper.gridCols + 1);
 						break;
-					case minesweeper.gridRows://right edge, not a corner
-						neighborList.push(thisId + minesweeper.gridCols - 1);
-						neighborList.push(thisId + minesweeper.gridCols);
-						neighborList.push(thisId - 1);
+					case minesweeper.gridRows://bottom edge, not a corner
+						// bottom edge, not a corner
 						neighborList.push(thisId - minesweeper.gridCols - 1);
 						neighborList.push(thisId - minesweeper.gridCols);
+						neighborList.push(thisId - minesweeper.gridCols + 1);
+						neighborList.push(thisId - 1);
+						neighborList.push(thisId + 1);
 						break
-					default://middle block, all 8 surrounding
+					default:// middle tile, full set of neighbors
 						neighborList.push(thisId - minesweeper.gridCols - 1);
 						neighborList.push(thisId - minesweeper.gridCols);
 						neighborList.push(thisId - minesweeper.gridCols + 1);
@@ -102,6 +110,7 @@ minesweeper.Models.Tile = Backbone.Model.extend({
 						neighborList.push(thisId + minesweeper.gridCols + 1);						
 				}
 		}//switch (this.get('yPos'))
+
 		this.set('neighbors', neighborList);
 	}
 
